@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+  metadata-complete="true" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name>Java Creed | How To Run Embedded Tomcat with Maven</display-name>
+
+  <servlet>
+    <servlet-name>JShellServer</servlet-name>
+    <servlet-class>com.JavaShell.JShellServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>JShellServer</servlet-name>
+    <url-pattern>/api/kernels/*</url-pattern>
+  </servlet-mapping>
+</web-app>

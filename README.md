@@ -12,3 +12,23 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+
+package and build:
+mvn clean package install
+
+run server:
+mvn cargo:run
+
+stop server:
+mvn cargo:stop
+
+TODO
+- Add MVN_HOME env variable dependency for jackson and azure-cosmos
+- Add test coverage
+- setup test pipeline for project
+- Add #maven-import: <package>,<version> parsing from snippet
+- Test interrupt and how it works on sleep
+- create java sample similar to c# sample
+- Test standard output interleaving between 2 kernel executions
