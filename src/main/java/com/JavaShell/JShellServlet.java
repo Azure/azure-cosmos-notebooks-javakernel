@@ -47,12 +47,6 @@ public class JShellServlet extends HttpServlet {
 			String kernelId = UUID.randomUUID().toString();
 			PrintWriter out = response.getWriter();
 			out.append("{'id': '" + kernelId + "', 'name': '" + requestContent.get("name").asText() + "'}");
-
-			// JsonNode jsonNode = new ObjectMapper().readTree(jb.toString());
-			// response.setContentType("text/plain");
-			// PrintWriter out = response.getWriter();
-			// out.append(JavaKernel.getResult(jsonNode.get("kernelId").asText(),
-			// jsonNode.get("code").asText()));
 		}
 	}
 }

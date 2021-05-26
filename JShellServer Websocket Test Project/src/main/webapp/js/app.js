@@ -4,11 +4,10 @@ var websocket = null;
 function init() {
 	if ("WebSocket" in window) {
 		while (kernelId === null) {
-			kernelId = prompt("Enter kernelId");
+			kernelId = prompt("Enter user name");
 		}
 
-		websocket = new WebSocket('ws://localhost:8080/JShellServer/api/kernels/' + kernelId + '/channels');
-
+		websocket = new WebSocket(`ws://localhost:9090/JShellServer/api/kernels/${kernelId}/channels`);
 		websocket.onopen = function(data) {
 			document.getElementById("main").style.display = "block";
 		};
@@ -38,28 +37,27 @@ function init() {
 function cleanUp() {
 	document.getElementById("main").style.display = "none";
 
-	kernelId = null;
+	userName = null;
 	websocket = null;
 }
 
 function sendMessage() {
 	var messageContent = document.getElementById("message").value;
-	var message = buildMessage(messageContent);
+	var message = buildMessage(userName, messageContent);
 
 	document.getElementById("message").value = '';
 
-	setMessage(messageContent);
+	setMessage(message);
 	websocket.send(JSON.stringify(message));
 }
 
 function sendInterrupt() {
 	alert("interrupt going to be called");
-$.post("http://localhost:8080/JShellServer/api/kernels/" + kernelId + "/interrupt", null,
+$.post("http://localhost:9090/JShellServer/api/kernels/" + kernelId + "/interrupt", null,
     function(data,status){
       alert("interrupt called");
     });
 }
-
 
 function buildMessage(message) {
 	return {
@@ -71,11 +69,11 @@ function setMessage(msg) {
 	var currentHTML = document.getElementById('scrolling-messages').innerHTML;
 	var newElem;
 
-	if (msg.kernelId === kernelId) {
-		newElem = '<p style="background: #ebebe0;"><span>' + kernelId
-				+ ' : ' + msg + '</span></p>';
+	if (msg.username === userName) {
+		newElem = '<p style="background: #ebebe0;"><span>' + msg.username
+				+ ' : ' + msg.message + '</span></p>';
 	} else {
-		newElem = '<p><span>' + kernelId + ' : ' + msg
+		newElem = '<p><span>' + msg.username + ' : ' + msg.message
 				+ '</span></p>';
 	}
 
